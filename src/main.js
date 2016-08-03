@@ -16,6 +16,7 @@ import NotFoundView from './components/404.vue'
 import DashboardView from './components/dash/Dashboard.vue'
 import TablesView from './components/dash/Tables.vue'
 import TasksView from './components/dash/Tasks.vue'
+import StudentsView from './components/dash/Students.vue'
 import SettingView from './components/dash/Setting.vue'
 import AccessView from './components/dash/Access.vue'
 import ServerView from './components/dash/Server.vue'
@@ -51,6 +52,11 @@ router.map({
       '/tables': {
         component: TablesView,
         name: 'Tables',
+        description: 'Simple and advance table in CoPilot'
+      },
+      '/students': {
+        component: StudentsView,
+        name: 'Students',
         description: 'Simple and advance table in CoPilot'
       },
       '/tasks': {

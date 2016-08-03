@@ -1,12 +1,11 @@
 <template>
   <section class="content">
-
     <div class="row center-block">
       <h2>Data tables</h2>
       <div class="col-md-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Data Table With Full Features</h3>
+            <h3 class="box-title">Data Table With Full Features <span style="align:right" v-on:click="updateStudents"><i class="fa fa-refresh"></i>Refresh</span></h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -14,7 +13,6 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div id="example1_length" class="dataTables_length">
-
                   </div>
                 </div>
               </div>
@@ -54,14 +52,26 @@ require('datatables.net')
 require('datatables.net-bs')
 
 module.exports = {
-  name: 'Tables',
+  name: 'Students',
   ready: function () {
     $('#example1').DataTable()
   },
+  methods: {
+    updateStudents: function () {
+      this.$parent.callAPI('GET', '/api/student', '').then(
+        function (response) {
+          if (response.data) {
+            var data = response.data
+            console.log(JSON.stringify(data))
+          } else {
+            console.log('timeout')
+          }
+        })
+    }
+  },
   data: function () {
     return {'table': [['John Doe', 'Male', '1996/03/27', 'Meh', 'Meh']],
-            'field_names': ['中文名', '英文名', '生日', '', '']
-            }
+            'field_names': ['中文名', '英文名', '生日', '', '']}
   }
 }
 </script>

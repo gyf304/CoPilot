@@ -156,7 +156,7 @@
         <ul class="sidebar-menu">
           <li class="header">TOOLS</li>
           <li class="active pageLink" v-on:click="toggleMenu"><a v-link="{path: '/'}"><i class="fa fa-desktop"></i><span class="page">Dashboard</span></a></li>
-          <li class="pageLink" v-on:click="toggleMenu"><a v-link="{path: '/tables'}"><i class="fa fa-table"></i><span class="page">Tables</span></a></li>
+          <li class="pageLink" v-on:click="toggleMenu"><a v-link="{path: '/students'}"><i class="fa fa-table"></i><span class="page">Students</span></a></li>
 
           <li class="header">ME</li>
           <li class="pageLink" v-on:click="toggleMenu"><a v-link="{path: '/tasks'}"><i class="fa fa-tasks"></i><span class="page">Tasks</span></a></li>
