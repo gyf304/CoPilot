@@ -22,6 +22,16 @@ import AccessView from './components/dash/Access.vue'
 import ServerView from './components/dash/Server.vue'
 import ReposView from './components/dash/Repos.vue'
 
+import Vuetable from 'vuetable/src/components/Vuetable.vue'
+import VuetablePagination from 'vuetable/src/components/VuetablePagination.vue'
+import VuetablePaginationDropdown  from 'vuetable/src/components/VuetablePaginationDropdown.vue'
+import VuetablePaginationBootstrap from 'vuetable/src/components/VuetablePaginationBootstrap.vue'
+
+Vue.component('vuetable', Vuetable);
+Vue.component('vuetable-pagination', VuetablePagination)
+Vue.component('vuetable-pagination-dropdown', VuetablePaginationDropdown)
+Vue.component('vuetable-pagination-bootstrap', VuetablePaginationBootstrap)
+
 // Import Install and register helper items
 Vue.use(Router)
 Vue.filter('count', count)

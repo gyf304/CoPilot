@@ -5,7 +5,7 @@
       <div class="col-md-12">
         <div class="box">
           <div class="box-header">
-            <h3 class="box-title">Data Table With Full Features <span style="align:right" v-on:click="updateStudents"><i class="fa fa-refresh"></i>Refresh</span></h3>
+            <h3 class="box-title" style="text-align: justify"><span style="width: 100%"></span><span ><i class="fa fa-refresh"></i>Refresh</span></h3>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
@@ -22,15 +22,17 @@
                   <table aria-describedby="example1_info" role="grid" id="example1" class="table table-bordered table-striped dataTable">
                     <thead>
                       <tr role="row">
-                        <th aria-label="activate to sort column descending" aria-sort="ascending" style="width: 167px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_asc" v-for="item in field_names" track-by="$index">{{item}}</th>                      </tr>
+                        <th aria-label="Rendering engine: activate to sort column descending" aria-sort="ascending" style="width: 167px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting_asc">Rendering engine</th>
+                        <th aria-label="Browser: activate to sort column ascending" style="width: 207px;" colspan="1" rowspan="1" aria-controls="example1" tabindex="0" class="sorting">Browser</th>
+                      </tr>
                     </thead>
                     <tbody>
-                      <tr class="odd" role="row" v-for="line in table" track-by="$index">
-                        <td v-for="item in line" track-by="$index">{{item}}</td>
-                      </tr>
                     </tbody>
                     <tfoot>
-
+                      <tr>
+                        <th colspan="1" rowspan="1">Rendering engine</th>
+                        <th colspan="1" rowspan="1">Browser</th>
+                      </tr>
                     </tfoot>
                   </table>
                 </div>
@@ -54,24 +56,32 @@ require('datatables.net-bs')
 module.exports = {
   name: 'Students',
   ready: function () {
-    $('#example1').DataTable()
+    $('#example1').DataTable({
+      'ajax': {
+        'url': 'http://localhost:5000/api/student',
+        'type': 'GET',
+        'beforeSend': function (request) {
+          request.setRequestHeader('Content-Type', 'application/vnd.api+json')
+          request.setRequestHeader('Accept', 'application/vnd.api+json')
+        }
+      },
+      'columns': [
+        { 'data': 'chinese_name' },
+        { 'data': 'english_name' }
+      ]
+    })
   },
-  methods: {
-    updateStudents: function () {
-      this.$parent.callAPI('GET', '/api/student', '').then(
-        function (response) {
-          if (response.data) {
-            var data = response.data
-            console.log(JSON.stringify(data))
-          } else {
-            console.log('timeout')
-          }
-        })
-    }
+  attached: function () {
+    console.log('attached')
+    // $('#example1').DataTable()
   },
   data: function () {
-    return {'table': [['John Doe', 'Male', '1996/03/27', 'Meh', 'Meh']],
-            'field_names': ['中文名', '英文名', '生日', '', '']}
+    return {'table': [['']],
+            'fieldNames': ['中文名', '英文名'],
+            'page': 1,
+            'totalPages': 10}
+  },
+  methods: {
   }
 }
 </script>
